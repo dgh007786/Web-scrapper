@@ -1,3 +1,6 @@
+#for installing all required libraries run following command.
+#pip install beautifulsoup4 python-csv requests numpy selenium urllib3 os-sys opencv-python
+
 from asyncio.windows_events import NULL
 from typing import final
 from bs4 import BeautifulSoup
@@ -5,7 +8,7 @@ import csv
 import requests
 import numpy as np
 
-from time import sleep
+#from time import sleep
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.common.by import By
@@ -19,14 +22,14 @@ import os
 from os.path import isfile, join 
 
 #opencvforvideo
-import cv2  # pip install opencv-python 
+import cv2  
 
-
+#pip install beautifulsoup4 python-csv requests numpy selenium urllib3 os-sys opencv-python
 subprodurl = []
 errdownld = []
 
-#url = input()
-url="https://sulfur.one/products/argos-natsu-bench"
+print("COPY THE LINK OF THE SUBPRODUCT FROM SULFUR.ONE FOR CONVERTING IT IN VIDEO(.MP4) FILE: ")
+url = input()
 req = Request(url)
 try:
     response = urlopen(req)
@@ -41,7 +44,7 @@ else:
     print("URL is good!")
 
 
-PATH = r"C:\Users\dgh00\Desktop\Web scrapper\webscraper\chromedriver.exe"
+PATH = os.getcwd()
 driver = webdriver.Chrome(PATH)
 driver.get(url)
 
@@ -106,12 +109,28 @@ def convert_pictures_to_video(pathIn, pathOut, fps, time):
             frame_array.append(img)
     out=cv2.VideoWriter(pathOut,cv2.VideoWriter_fourcc(*'mp4v'),fps,size)
     font = cv2.FONT_HERSHEY_SIMPLEX
-    for i in range(len(frame_array)):
-        cv2.putText(frame_array[i],title.removesuffix('-'),(600, 50),font,1,(72, 132, 189),2,cv2.LINE_4)
-        cv2.putText(frame_array[i],'Now Available',(50, 1000),font,1,(72, 132, 189),2,cv2.LINE_4)
-        cv2.putText(frame_array[i],'on Sulfur.one',(50, 1050),font,1,(72, 132, 189),2,cv2.LINE_4)
-        cv2.imshow('video', frame_array[i])
+
+    if((len(frame_array))<=6):
+        for i in range(len(frame_array)):
+            cv2.putText(frame_array[i],title.removesuffix('-'),(600, 50),font,1,(72, 132, 189),2,cv2.LINE_4)
+            cv2.putText(frame_array[i],'Now Available',(50, 1000),font,1,(72, 132, 189),2,cv2.LINE_4)
+            cv2.putText(frame_array[i],'on Sulfur.one',(50, 1050),font,1,(72, 132, 189),2,cv2.LINE_4)
+            cv2.imshow('video', frame_array[i])
         out.write(frame_array[i])
+        out.write(frame_array[i])
+    else:
+        for i in range(len(frame_array)):
+            cv2.putText(frame_array[i],title.removesuffix('-'),(600, 50),font,1,(72, 132, 189),2,cv2.LINE_4)
+            cv2.putText(frame_array[i],'Now Available',(50, 1000),font,1,(72, 132, 189),2,cv2.LINE_4)
+            cv2.putText(frame_array[i],'on Sulfur.one',(50, 1050),font,1,(72, 132, 189),2,cv2.LINE_4)
+            cv2.imshow('video', frame_array[i])
+            out.write(frame_array[i])
+        for j in range(12-len(frame_array)):
+            cv2.putText(frame_array[i],title.removesuffix('-'),(600, 50),font,1,(72, 132, 189),2,cv2.LINE_4)
+            cv2.putText(frame_array[i],'Now Available',(50, 1000),font,1,(72, 132, 189),2,cv2.LINE_4)
+            cv2.putText(frame_array[i],'on Sulfur.one',(50, 1050),font,1,(72, 132, 189),2,cv2.LINE_4)
+            cv2.imshow('video', frame_array[i])
+            out.write(frame_array[i])       
     out.release()
 
 directory= path
